@@ -17,6 +17,6 @@ function Banner() {
       </div>
     </div>
   );
-};
+}
 
 export default Banner;
