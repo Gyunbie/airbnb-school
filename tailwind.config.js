@@ -5,8 +5,9 @@ module.exports = {
   theme: {
     extend: {},
   },
+  plugins: [require("tailwind-scrollbar-hide"), require("tailwind-scrollbar")],
   variants: {
     extend: {},
+    scrollbar: ["rounded"],
   },
-  plugins: [require("tailwind-scrollbar-hide")],
 };
