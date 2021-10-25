@@ -54,7 +54,7 @@ function Header({placeholder = "Start your search"}) {
         className="relative flex items-center h-10 cursor-pointer my-auto"
       >
         <Image
-          src="https://links.papareact.com/qd3"
+          src="/assets/images/airbnb-logo.png"
           layout="fill"
           objectFit="contain"
           objectPosition="left"
@@ -62,7 +62,7 @@ function Header({placeholder = "Start your search"}) {
       </div>
 
       {/* ### MIDDLE - Search Bar ### */}
-      <div className="flex items-center md:border-2 rounded-full py-2 md:shadow-sm focus-within:border-red-400 transition duration-150">
+      <div className="flex items-center md:border-2 rounded-full py-2 md:shadow-sm focus-within:border-red-400 hover:border-red-400 transition duration-150">
         <input
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
@@ -70,7 +70,7 @@ function Header({placeholder = "Start your search"}) {
           placeholder={placeholder}
           className="flex-grow pl-5 bg-transparent outline-none text-sm text-gray-600 placeholder-gray-400"
         />
-        <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" />
+        <SearchIcon className="hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2 hover:text-red-400 hover:bg-white hover:border-2 hover:border-red-400 transition duration-150" />
       </div>
 
       {/* ### RIGHT ### */}
