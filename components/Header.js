@@ -51,13 +51,13 @@ function Header({placeholder = "Start your search"}) {
       {/* ### LEFT - Logo ### */}
       <div
         onClick={() => router.push("/")}
-        className="relative flex items-center h-10 cursor-pointer my-auto"
+        className="relative flex items-center h-10 cursor-pointer my-auto hover:scale-110 transition duration-150"
       >
         <Image
-          src="/assets/images/airbnb-logo.png"
+          src="/assets/images/airbnb-orange.svg"
           layout="fill"
           objectFit="contain"
-          objectPosition="left"
+          objectPosition="center"
         />
       </div>
 
@@ -78,7 +78,7 @@ function Header({placeholder = "Start your search"}) {
         <p className="hidden md:inline cursor-pointer">Become a host</p>
         <GlobeAltIcon className="h-6 cursor-pointer" />
 
-        <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
+        <div className="flex items-center space-x-2 border-2 p-2 rounded-full cursor-pointer">
           <MenuIcon className="h-6" />
           <UserCircleIcon className="h-6" />
         </div>
