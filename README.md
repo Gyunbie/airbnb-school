@@ -1,29 +1,31 @@
-# Next.js + Tailwind CSS Example
+<!-- BIG CENTERED HEADING -->
+<h1 align="center">Airbnb Clone</h1>
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+<!-- ICONS -->
+<p align="center">
+<img src="https://img.shields.io/badge/-React.Js-61DAFB?logo=react&logoColor=white&style=for-the-badge&logoWidth=20" >
+<img src="https://img.shields.io/badge/-Next.Js-000000?logo=nextdotjs&logoColor=white&style=for-the-badge&logoWidth=20" >
+<img src="https://img.shields.io/badge/-TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white&style=for-the-badge&logoWidth=20" >
+<img src="https://img.shields.io/tokei/lines/github/gyunbie/airbnb?style=for-the-badge" >
+</p>
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+<!-- SUMMARY -->
+_Basic clone of Airbnb, a room renting application._
 
-## Preview
+<!-- SCREENSHOT & LIVE DEMO -->
+<p align="center">
+<img src="https://github.com/Gyunbie/airbnb/blob/main/public/assets/images/airbnb-clone-desktop-mobile.png">
+<h1 align="center"><a href="https://airbnb-gyunbie.vercel.app/">LIVE DEMO</a></h1>
+</p>
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+<!-- DESCRIPTION -->
+# DESCRIPTION
+Airbnb Clone is a fully responsive web application which clones Airbnb and is built on React.js. It uses dummy data to list results on search. It has Mapbox implemented to show available locations as pins on the map.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+<!-- FEATURES -->
+# FEATURES
+The technologies used are ***React.js***, ***Next.js***, and ***TailwindCSS***.
+- ***DatePicker*** to select the date ranges.
+- ***Mapbox*** to show locations on a map in the search page.
+- ***ReactProgressBar*** to indicate loading between pages.
+- Dummy JSON data to list rooms and mark them on the map.
