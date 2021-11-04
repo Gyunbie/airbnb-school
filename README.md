@@ -14,7 +14,7 @@ _Basic clone of Airbnb, a room renting application._
 
 <!-- SCREENSHOT & LIVE DEMO -->
 <p align="center">
-<img src="https://github.com/Gyunbie/airbnb/blob/main/public/assets/images/airbnb-clone-desktop-mobile.png">
+<img src="https://github.com/Gyunbie/airbnb/blob/master/public/assets/images/airbnb-clone-desktop-mobile.png">
 <h1 align="center"><a href="https://airbnb-gyunbie.vercel.app/">LIVE DEMO</a></h1>
 </p>
 
