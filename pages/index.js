@@ -10,7 +10,7 @@ export default function Home({ exploreData, cardsData }) {
   return (
     <div className=''>
       <Head>
-        <title>Airbnb</title>
+        <title>Rental House</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -52,7 +52,7 @@ export default function Home({ exploreData, cardsData }) {
         <LargeCard
           img='/assets/images/bottom-banner.jpg'
           title='The Greatest Outdoors'
-          description='Wishlists curated by Airbnb.'
+          description='Wishlists curated by us.'
           buttonText='Get Inspired'
         />
       </main>
