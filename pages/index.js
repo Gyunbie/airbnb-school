@@ -8,10 +8,10 @@ import SmallCard from "../components/SmallCard";
 
 export default function Home({ exploreData, cardsData }) {
   return (
-    <div className="">
+    <div className=''>
       <Head>
         <title>Airbnb</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       {/* Header */}
@@ -21,12 +21,12 @@ export default function Home({ exploreData, cardsData }) {
       <Banner />
 
       {/* Main */}
-      <main className="max-w-7xl mx-auto px-8 sm:px-16">
-        <section className="pt-6">
-          <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
+      <main className='max-w-7xl mx-auto px-8 sm:px-16'>
+        <section className='pt-6'>
+          <h2 className='text-4xl font-semibold pb-5'>Explore Nearby</h2>
 
           {/* Pull some data from server - API endpoints */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {exploreData?.map(({ img, distance, location }) => (
               <SmallCard
                 key={img}
@@ -40,9 +40,9 @@ export default function Home({ exploreData, cardsData }) {
 
         {/* Live Anywhere */}
         <section>
-          <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
+          <h2 className='text-4xl font-semibold py-8'>Live Anywhere</h2>
 
-          <div className="pb-8 flex space-x-3 overflow-hidden lg:overflow-x-visible lg:scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 p-3 -ml-3">
+          <div className='pb-8 flex space-x-3 overflow-hidden lg:overflow-x-visible lg:scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 p-3 -ml-3'>
             {cardsData?.map(({ img, title }) => (
               <MediumCard key={img} img={img} title={title} />
             ))}
@@ -50,10 +50,10 @@ export default function Home({ exploreData, cardsData }) {
         </section>
 
         <LargeCard
-          img="/assets/images/bottom-banner.jpg"
-          title="The Greatest Outdoors"
-          description="Wishlists curated by Airbnb."
-          buttonText="Get Inspired"
+          img='/assets/images/bottom-banner.jpg'
+          title='The Greatest Outdoors'
+          description='Wishlists curated by Airbnb.'
+          buttonText='Get Inspired'
         />
       </main>
 
@@ -63,18 +63,18 @@ export default function Home({ exploreData, cardsData }) {
 }
 
 export async function getStaticProps() {
-  const exploreData = await fetch("https://links.papareact.com/pyp").then(
-    (res) => res.json()
+  const exploreData = await fetch("https://links.papareact.com/pyp").then(res =>
+    res.json()
   );
 
-  const cardsData = await fetch("https://links.papareact.com/zp1").then((res) =>
+  const cardsData = await fetch("https://links.papareact.com/zp1").then(res =>
     res.json()
   );
 
   return {
     props: {
       exploreData,
-      cardsData,
-    },
+      cardsData
+    }
   };
 }

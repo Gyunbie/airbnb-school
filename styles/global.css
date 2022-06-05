@@ -4,4 +4,17 @@
   .button {
     @apply px-4 py-2 border rounded-full cursor-pointer hover:shadow-lg active:scale-95 active:bg-gray-100 transition transform duration-100 ease-out select-none;
   }
+
+  .edit-button .p-button-label {
+    @apply !w-20 !inline-block !flex-grow-0;
+  }
+
+  .edit-button {
+    @apply !flex !justify-center !items-center !mx-auto !w-full;
+  }
+}
+
+.shadow-full-box {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
