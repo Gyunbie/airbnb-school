@@ -54,15 +54,30 @@ function Header({ placeholder = "Start your search" }) {
   };
 
   const search = () => {
-    router.push({
-      pathname: "/search",
-      query: {
-        location: searchInput,
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-        guestNumber
-      }
-    });
+    if (router.pathname.split("/")[1] === "search") {
+      router.push({
+        pathname: "/search",
+        query: {
+          location: searchInput,
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString(),
+          guestNumber
+        }
+      });
+      setTimeout(() => {
+        window.history.go();
+      }, 500);
+    } else {
+      router.push({
+        pathname: "/search",
+        query: {
+          location: searchInput,
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString(),
+          guestNumber
+        }
+      });
+    }
   };
 
   function logit() {
