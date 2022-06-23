@@ -1,4 +1,4 @@
-import { PhoneIcon } from "@heroicons/react/solid";
+import { PhoneIcon, TrashIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Button } from "primereact/button";
@@ -8,12 +8,21 @@ import { Toast } from "primereact/toast";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
+import Image from "next/image";
+import { ConfirmDialog } from "primereact/confirmdialog"; // To use <ConfirmDialog> tag
+import { confirmDialog } from "primereact/confirmdialog"; // To use confirmDialog method
 
 function profile() {
   const storeUser = useSelector(state => state.user);
   const [user, setUser] = useState(null);
   const toast = useRef(null);
   const [inputs, setInputs] = useState({});
+  const [reservation, setReservation] = useState(null);
+
+  function dateToString(date) {
+    const d = new Date(date);
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  }
 
   useEffect(() => {
     async function getUser() {
@@ -22,6 +31,18 @@ function profile() {
           "https://ege-micro-authentication.herokuapp.com/api/v1/authentication/getProfileDataWithId",
           { params: { request_id: storeUser.attrs.id } }
         );
+
+        const reservation = await axios.get(
+          "https://ege-micro-reservation.herokuapp.com/api/v1/reservation/getMyReservationsUser",
+          { params: { id: storeUser.attrs.id } }
+        );
+
+        const homes = await axios.get("http://35.173.122.10:5000/home", {
+          headers: {
+            sahipID: "629cc9c1a71b0d58149e3880"
+          }
+        });
+        console.log(homes);
 
         if (!user.data) {
           toast.current.show({
@@ -38,6 +59,18 @@ function profile() {
           console.log(user.data);
           setUser(user.data);
           setInputs({ ...user.data });
+        }
+
+        if (!reservation.data) {
+          toast.current.show({
+            severity: "error",
+            summary: "ERROR",
+            detail: "No reservation found!",
+            life: 3000
+          });
+        } else {
+          console.log(reservation.data);
+          setReservation(reservation.data);
         }
       } catch (e) {
         toast.current.show({
@@ -79,6 +112,18 @@ function profile() {
 
   function handleInputChange(e) {
     setInputs({ ...inputs, [e.target.id]: e.target.value });
+  }
+
+  async function removeReservation(home_id) {
+    const confirm1 = () => {
+      confirmDialog({
+        message: `Are you sure you want remove the reservation for ${home_id}?`,
+        header: "Confirmation",
+        icon: "pi pi-exclamation-triangle",
+        accept: () => {},
+        reject: () => {}
+      });
+    };
   }
 
   return (
@@ -178,6 +223,38 @@ function profile() {
             </div>
           </div>
         )}
+      </div>
+      <div className='h-[calc(100vh-92px)] mx-auto w-full max-w-7xl p-16'>
+        <div className='space-y-3 text-center w-full'>
+          {reservation &&
+            reservation.map(res => (
+              <div
+                key={res.id}
+                className='h-32 w-full shadow-full-box rounded-lg flex items-center gap-x-5 p-2'
+              >
+                <div className='h-28 w-28 relative rounded-md overflow-hidden'>
+                  <Image
+                    src='https://www.klasiksanatlar.com/img/sayfalar/b/1_1598452306_resim.png'
+                    layout='fill'
+                  />
+                </div>
+
+                <div className='flex flex-col gap-y-1'>
+                  <h1 className='text-xl font-semibold text-left'>
+                    {res.home_id}
+                  </h1>
+                  <h2>
+                    {dateToString(res.start_date)} -{" "}
+                    {dateToString(res.end_date)}
+                  </h2>
+                </div>
+
+                <div className='ml-auto mr-5'>
+                  <TrashIcon className='h-12 w-12 p-1.5 rounded-lg bg-red-300 text-red-600 hover:bg-red-400 duration-100' />
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
     </>
   );

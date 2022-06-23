@@ -23,6 +23,7 @@ import { Toast } from "primereact/toast";
 import axios from "axios";
 import { setUser } from "../store/reducer/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 function Header({ placeholder = "Start your search" }) {
   const [searchInput, setSearchInput] = useState("");
@@ -130,6 +131,23 @@ function Header({ placeholder = "Start your search" }) {
       detail: "Successfully signed out",
       life: 3000
     });
+  }
+
+  function becomeHost() {
+    const confirm1 = () => {
+      confirmDialog({
+        message: "Are you sure you want to become a host?",
+        header: "Confirmation",
+        icon: "pi pi-exclamation-triangle",
+        accept: async () => {
+          const addHost = await axios.post(
+            "http://35.173.122.10:5000/home",
+            {}
+          );
+        },
+        reject: () => {}
+      });
+    };
   }
 
   useEffect(() => {
