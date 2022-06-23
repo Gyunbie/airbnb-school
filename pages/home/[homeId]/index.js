@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,12 +11,14 @@ import "swiper/css/navigation";
 import axios from "axios";
 import Header from "../../../components/Header";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 function SingleHome() {
   const router = useRouter();
   const { homeId } = router.query;
   const [home, setHome] = useState(null);
   const [randomHomes, setRandomHomes] = useState(null);
+  const selector = useSelector(state => state.user);
 
   useEffect(async () => {
     const home = await axios.get("http://35.173.122.10:5000/home", {
@@ -25,8 +28,6 @@ function SingleHome() {
     });
     console.log(home);
     setHome(home.data);
-
-    console.log(home.data.sehir);
     const randomHomes = await axios.get(
       `http://35.173.122.10/getRandomHouses?city=${home.data.sehir}&count=3`
     );
@@ -34,9 +35,39 @@ function SingleHome() {
     setRandomHomes(randomHomes.data);
   }, [homeId]);
 
+  function dateToString(date) {
+    const d = new Date(date);
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  }
+
+  async function reserveRoom() {
+    confirmDialog({
+      message: `You are reserving ${home.title} from ${dateToString(
+        router.query.startDate
+      )} to ${dateToString(router.query.endDate)}`,
+      header: "Confirmation",
+      icon: "pi pi-exclamation-triangle",
+      accept: async () => {
+        const makeRes = await axios.post(
+          "https://ege-micro-reservation.herokuapp.com/api/v1/reservation/addNewReservation",
+          {
+            start_date: router.query.startDate,
+            end_date: router.query.endDate,
+            home_id: home._id,
+            user_id: selector.attrs.id
+          }
+        );
+      },
+      reject: () => {
+        console.log("b");
+      }
+    });
+  }
+
   return (
     <>
       <Header />
+      <ConfirmDialog />
       {home && (
         <div className='h-screen w-screen overflow-hidden flex flex-col gap-y-12 px-24 py-16 max-w-[1440px] mx-auto'>
           <div className='space-x-8 flex items-start'>
@@ -102,8 +133,11 @@ function SingleHome() {
                 {home.adres}
               </p>
 
-              <button className='w-full h-10 bg-blue-600 hover:bg-blue-700 duration-150 cursor-pointer text-white rounded-lg px-3 py-1 font-medium active:scale-[97.5%]'>
-                Rezervasyon yap
+              <button
+                onClick={reserveRoom}
+                className='w-full h-10 bg-blue-600 hover:bg-blue-700 duration-150 cursor-pointer text-white rounded-lg px-3 py-1 font-medium active:scale-[97.5%]'
+              >
+                Reserve
               </button>
             </div>
           </div>

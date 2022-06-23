@@ -10,6 +10,7 @@ import axios from "axios";
 function Search({ searchResults }) {
   const router = useRouter();
   const [rooms, setRooms] = useState(null);
+  const [dates, setDates] = useState(null);
   const { location, startDate, endDate, guestNumber } = router.query;
 
   const formattedStartDate = format(new Date(startDate), "dd MMMM yy");
@@ -21,6 +22,10 @@ function Search({ searchResults }) {
     async function getRooms() {
       const SD = new Date(router.query.startDate);
       const ED = new Date(router.query.endDate);
+      setDates({
+        startDate: router.query.startDate,
+        endDate: router.query.endDate
+      });
       const searchParams = {
         keyword: location,
         sday: SD.getDate(),
@@ -84,6 +89,10 @@ function Search({ searchResults }) {
                       description={room.desc}
                       star={5}
                       price={room.price}
+                      dates={{
+                        startDate: router.query.startDate,
+                        endDate: router.query.endDate
+                      }}
                     />
                   ))}
                 </div>

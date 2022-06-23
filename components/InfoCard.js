@@ -14,11 +14,8 @@ function InfoCard({
   dates
 }) {
   return (
-    <div
-      onClick={router.push({
-        pathname: `/home/${id}`,
-        query: {}
-      })}
+    <Link
+      href={`/home/${id}?startDate=${dates.startDate}&endDate=${dates.endDate}`}
       className=''
     >
       <div className='flex px-2 py-7 pr-4 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first:border-t'>
@@ -59,7 +56,7 @@ function InfoCard({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
