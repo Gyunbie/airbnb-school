@@ -252,10 +252,14 @@ function Header({ placeholder = "Start your search" }) {
           }`}
         >
           <div className='flex items-center divide-x-2 divide-gray-100 space-x-1 border-2 p-2 rounded-full cursor-pointer font-medium'>
-            <div className='flex space-x-1 hover:text-red-400 duration-150 !pr-1'>
-              <GlobeAltIcon className='h-6 cursor-pointer' />
-              <p className='hidden md:inline cursor-pointer'>Become a host</p>
-            </div>
+            {!user?.attrs?.host && (
+              <Link href='/addHome'>
+                <div className='flex space-x-1 hover:text-red-400 duration-150 !pr-1'>
+                  <GlobeAltIcon className='h-6 cursor-pointer' />
+                  <p className='hidden md:inline cursor-pointer'>Add Home</p>
+                </div>
+              </Link>
+            )}
 
             {!user?.attrs && (
               <button

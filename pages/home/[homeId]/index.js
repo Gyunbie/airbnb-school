@@ -1,9 +1,10 @@
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Toast } from "primereact/toast";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -16,6 +17,7 @@ import { useSelector } from "react-redux";
 function SingleHome() {
   const router = useRouter();
   const { homeId } = router.query;
+  const toast = useRef(null);
   const [home, setHome] = useState(null);
   const [randomHomes, setRandomHomes] = useState(null);
   const selector = useSelector(state => state.user);
@@ -48,15 +50,26 @@ function SingleHome() {
       header: "Confirmation",
       icon: "pi pi-exclamation-triangle",
       accept: async () => {
-        const makeRes = await axios.post(
-          "https://ege-micro-reservation.herokuapp.com/api/v1/reservation/addNewReservation",
-          {
-            start_date: router.query.startDate,
-            end_date: router.query.endDate,
-            home_id: home._id,
-            user_id: selector.attrs.id
-          }
-        );
+        try {
+          const makeRes = await axios.post(
+            "https://ege-micro-reservation.herokuapp.com/api/v1/reservation/addNewReservation",
+            {
+              start_date: router.query.startDate,
+              end_date: router.query.endDate,
+              home_id: home._id,
+              user_id: selector.attrs.id
+            }
+          );
+
+          toast.current.show({
+            severity: "success",
+            summary: "SUCCESS",
+            detail: "Reservation made successfully!",
+            life: 3000
+          });
+        } catch (e) {
+          console.log(e);
+        }
       },
       reject: () => {
         console.log("b");
@@ -66,6 +79,7 @@ function SingleHome() {
 
   return (
     <>
+      <Toast ref={toast} />
       <Header />
       <ConfirmDialog />
       {home && (
@@ -158,7 +172,7 @@ function SingleHome() {
                         />
                       )}
                     </div>
-                    <div className='bg-gray-300 rounded-b-lg px-4 py-2 h-40'>
+                    <div className='shadow-full-box rounded-b-lg px-4 py-2 h-40'>
                       <h2 className='text-lg font-medium'>
                         {randomHome.title}
                       </h2>
